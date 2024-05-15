@@ -7,12 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
-
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class User {
 
-public enum Level { Beginner, Intermediate, Advanced, Admin }
+    public enum Level {
+        Beginner, Intermediate, Advanced, Admin
+    }
 
     @Id
     private String username;
@@ -20,11 +21,11 @@ public enum Level { Beginner, Intermediate, Advanced, Admin }
     private String email;
     @Enumerated(EnumType.STRING)
     private Level level;
-   
 
-    public User(){
-        
+    public User() {
+
     }
+
     public String getUsername() {
         return username;
     }
