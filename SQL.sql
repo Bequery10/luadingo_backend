@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Badge` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Option` (
   `question_id` INT AUTO_INCREMENT NOT NULL,
-  `option` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`question_id`, `option`),
+  `choice` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`question_id`, `choice`),
   FOREIGN KEY(`question_id`) REFERENCES Question(`question_id`))
   ENGINE=InnoDB;
 
