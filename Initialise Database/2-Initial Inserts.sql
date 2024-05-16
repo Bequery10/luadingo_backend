@@ -64,4 +64,41 @@ INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,19);
 INSERT INTO quiz(quiz_title) VALUE ('Spanish Part V'); -- 20
 INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,20);
 
--- QUESTIONS IN QUIZZES
+-- MAKING A FRIEND REQUEST PROCEDURE
+
+DELIMITER //
+
+CREATE PROCEDURE AddFriend(IN input_username VARCHAR(50), IN TargetUser VARCHAR(50))
+BEGIN
+    DECLARE existsPending INT DEFAULT 0;
+    DECLARE existsAccepted INT DEFAULT 0;
+    DECLARE existsSent INT DEFAULT 0;
+
+    SELECT COUNT(*)
+    INTO existsPending
+    FROM friends_with
+    WHERE username2 = input_username AND status = 'Pending';
+
+    SELECT COUNT(*)
+    INTO existsAccepted
+    FROM friends_with
+    WHERE (username1 = TargetUser OR username2 = TargetUser) AND status = 'Accepted';
+    
+    SELECT COUNT(*)
+    INTO existsSent
+    FROM friends_with
+    WHERE username1 = input_username AND status = 'Pending';
+
+
+    IF (existsPending > 0 OR existsAccepted > 0 OR existsSent > 0) THEN -- THERES A FRIEND REQUEST OR THE FRIEND ALREADY EXISTS! 
+    
+        SELECT 'Cant add friend' AS result;
+    ELSE -- SENDING REQUEST!
+    
+		INSERT INTO friends_with (username1,username2) VALUE (input_username,TargetUser);
+        
+        SELECT 'Friend request sent' AS result;
+    END IF;
+END //
+
+DELIMITER ;
