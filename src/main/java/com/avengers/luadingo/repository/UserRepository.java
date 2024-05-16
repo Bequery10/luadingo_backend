@@ -1,41 +1,39 @@
 package com.avengers.luadingo.repository;
 
+import com.avengers.luadingo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jdbc.repository.query.Modifying;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import com.avengers.luadingo.model.User;
 
-import java.util.*;
+import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public class UserRepository {
 
-    // @Query("SELECT * FROM user")
-    // User getAll();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    // @Query("SELECT * FROM User u WHERE u.username = ?1")
-    // User get(String username);
+    public List<User> findAll() {
+        String sql = "SELECT * FROM User";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+    }
 
-    // @Modifying
-    // @Query("INSERT INTO User (username, password, email, level) VALUES
-    // (:username, :password, :email, :level)")
-    // int add(@Param("username") String username, @Param("password") String
-    // password, @Param("email") String email,
-    // @Param("level") int level);
+    public User getReferenceById(String username) {
+        String sql = "SELECT * FROM User u WHERE u.username = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username);
+    }
 
-    // @Modifying
-    // @Query("DELETE FROM User u WHERE u.username = :username")
-    // int delete(@Param("username") String username);
+    public int save(User user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String email = user.getEmail();
+        String sql = "INSERT INTO User (username, password, email) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(sql, username, password, email);
+    }
 
-    // @Modifying
-    // @Query("UPDATE User u SET u.password = :password, u.email = :email, u.level =
-    // :level WHERE u.username = :username")
-    // int update(@Param("password") String password, @Param("email") String email,
-    // @Param("level") int level,
-    // @Param("username") String username);
-
+    public int deleteById(String username) {
+        String sql = "DELETE FROM User WHERE username = ?";
+        return jdbcTemplate.update(sql, username);
+    }
 }

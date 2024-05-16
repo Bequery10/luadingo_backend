@@ -10,29 +10,29 @@ import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.repository.UserRepository;
 
 @Service
-public class UserServiceImp implements UserService{
+public class UserServiceImp implements UserService {
 
     @Autowired
-    private  UserRepository userRepository;
-    
+    private UserRepository userRepository;
+
     @Override
-    public User save(User user) {
+    public int save(User user) {
         return userRepository.save(user);
     }
 
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
-         }
+    }
 
     @Override
     public User get(String username) {
-            return userRepository.getReferenceById(username);
+        return userRepository.getReferenceById(username);
     }
 
     @Override
-    public void delete(String username) {
-        userRepository.deleteById(username);
+    public int delete(String username) {
+        return userRepository.deleteById(username);
     }
-    
+
 }

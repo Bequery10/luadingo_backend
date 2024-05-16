@@ -8,9 +8,12 @@ import java.util.*;
 import com.avengers.luadingo.model.User;
 
 public interface UserService {
-    
-    public User save(User user);
+
+    public int save(User user);
+
     public List<User> getAll();
+
     public User get(String username);
-    public void delete(String username);
+
+    public int delete(String username);
 }
