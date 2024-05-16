@@ -16,7 +16,7 @@ public class QuizServiceImp implements QuizService {
     private QuizRepository quizRepository;
 
     @Override
-    public Quiz save(Quiz quiz) {
+    public int save(Quiz quiz) {
         return quizRepository.save(quiz);
     }
 
@@ -31,8 +31,8 @@ public class QuizServiceImp implements QuizService {
     }
 
     @Override
-    public void delete(int quiz_id) {
-        quizRepository.deleteById(quiz_id);
+    public int delete(int quiz_id) {
+        return quizRepository.deleteById(quiz_id);
     }
 
 }
