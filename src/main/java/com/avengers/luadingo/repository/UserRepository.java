@@ -2,6 +2,7 @@ package com.avengers.luadingo.repository;
 
 import com.avengers.luadingo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -36,4 +37,15 @@ public class UserRepository {
         String sql = "DELETE FROM User WHERE username = ?";
         return jdbcTemplate.update(sql, username);
     }
+
+    public boolean isExist(String username, String password) {
+        String sql = "SELECT * FROM User u WHERE u.username = ? AND u.password = ?";
+        try {
+            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+    }
+
 }

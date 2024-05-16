@@ -35,4 +35,9 @@ public class UserServiceImp implements UserService {
         return userRepository.deleteById(username);
     }
 
+    @Override
+    public boolean isExist(String username, String password) {
+        return userRepository.isExist(username, password);
+    }
+
 }
