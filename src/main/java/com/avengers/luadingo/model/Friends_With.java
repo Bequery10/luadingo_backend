@@ -13,8 +13,8 @@ import jakarta.persistence.*;
 public class Friends_With {
 
     public enum Status {
-        PENDING,
-        ACCEPTED
+        Pending,
+        Accepted
     }
 
     @EmbeddedId
