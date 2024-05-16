@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Badge` (
 -- -----------------------------------------------------
 -- Table `Luadingo`.`has_option`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Option` (
+CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Options` (
   `question_id` INT AUTO_INCREMENT NOT NULL,
   `choice` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`question_id`, `choice`),
