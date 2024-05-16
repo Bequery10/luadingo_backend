@@ -95,7 +95,7 @@ DELIMITER ;
 -- ATTEMPT MAKER PROCEDURE
 
 -- Format
--- CALL ('username',quiz_id,@output)
+-- CALL CreateAttempt('username',quiz_id,@output)
 -- Tries to create an attempt made by the username on quiz_id
 -- If the attempt creation is successful (quiz is valid) then @output is a 1 and makes a new attempt
 -- If the quiz isnt valid or the number of attempts made by the user on the quiz is past 5 then @output returns a 0 
