@@ -68,7 +68,11 @@ INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,20);
 
 DELIMITER //
 
-CREATE PROCEDURE AddFriend(IN input_username VARCHAR(50), IN TargetUser VARCHAR(50))
+CREATE PROCEDURE AddFriend(
+	IN input_username VARCHAR(50), 
+    IN TargetUser VARCHAR(50),
+    out invSuccess INT
+    )
 BEGIN
     DECLARE existsPending INT DEFAULT 0;
     DECLARE existsAccepted INT DEFAULT 0;
@@ -92,12 +96,46 @@ BEGIN
 
     IF (existsPending > 0 OR existsAccepted > 0 OR existsSent > 0) THEN -- THERES A FRIEND REQUEST OR THE FRIEND ALREADY EXISTS! 
     
-        SELECT 'Cant add friend' AS result;
+        SELECT 0
+        INTO invSuccess;
     ELSE -- SENDING REQUEST!
     
 		INSERT INTO friends_with (username1,username2) VALUE (input_username,TargetUser);
         
-        SELECT 'Friend request sent' AS result;
+        SELECT 1
+        INTO invSuccess;
+    END IF;
+END //
+
+DELIMITER ;
+
+-- PASSWORD CHECK PROCEDURE
+
+DELIMITER //
+
+CREATE PROCEDURE TryLogin(
+    IN input_username VARCHAR(50), 
+    IN input_password VARCHAR(255), 
+    OUT passMatch INT
+)
+BEGIN
+    DECLARE nameExists INT DEFAULT 0;
+
+    -- Check if the user exists
+    SELECT COUNT(*)
+    INTO nameExists
+    FROM user
+    WHERE username = input_username;
+
+    IF nameExists > 0 THEN
+        -- Check if the password matches
+        SELECT COUNT(*)
+        INTO passMatch
+        FROM user
+        WHERE username = input_username AND password = input_password;
+    ELSE
+        -- User does not exist, set passMatch to 0
+        SET passMatch = 0;
     END IF;
 END //
 
