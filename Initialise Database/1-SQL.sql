@@ -49,8 +49,7 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Attempt` (
   `attempt_current` INT NOT NULL DEFAULT '1',
   `attempt_score` INT NOT NULL DEFAULT '0',
   `attempt_timestamp` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`attempt_id`),
-  UNIQUE INDEX `score_UNIQUE` (`attempt_score` ASC) VISIBLE)
+  PRIMARY KEY (`attempt_id`))
   ENGINE=InnoDB;
 
 
