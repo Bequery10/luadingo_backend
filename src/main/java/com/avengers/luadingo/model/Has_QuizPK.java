@@ -1,10 +1,11 @@
 package com.avengers.luadingo.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import jakarta.persistence.Embeddable;
 
-
-public class Has_QuizPK implements Serializable{
+public class Has_QuizPK implements Serializable {
     private int quiz_id;
     private int course_id;
 
@@ -31,5 +32,22 @@ public class Has_QuizPK implements Serializable{
     public void setCourse_id(int course_id) {
         this.course_id = course_id;
     }
-    
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(quiz_id, course_id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Has_QuizPK other = (Has_QuizPK) obj;
+        return quiz_id == other.quiz_id && course_id == other.course_id;
+    }
+
 }

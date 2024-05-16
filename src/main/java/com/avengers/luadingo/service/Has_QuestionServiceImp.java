@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avengers.luadingo.model.Has_Question;
+import com.avengers.luadingo.model.Has_QuestionPK;
 import com.avengers.luadingo.repository.Has_QuestionRepository;
 
 @Service
-public class Has_QuestionServiceImp implements Has_QuestionService{
-    
+public class Has_QuestionServiceImp implements Has_QuestionService {
+
     @Autowired
     private Has_QuestionRepository has_questionRepository;
 
@@ -21,17 +22,17 @@ public class Has_QuestionServiceImp implements Has_QuestionService{
     }
 
     @Override
-    public List<Has_Question> getAllHas_Question() {
+    public List<Has_Question> getAll() {
         return has_questionRepository.findAll();
     }
 
     @Override
-    public Has_Question get(String question) {
-        return has_questionRepository.findById(question).get();
+    public Has_Question get(Has_QuestionPK id) {
+        return has_questionRepository.findById(id).get();
     }
 
     @Override
-    public void delete(String question) {
-        has_questionRepository.deleteById(question);
+    public void delete(Has_QuestionPK id) {
+        has_questionRepository.deleteById(id);
     }
 }

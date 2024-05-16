@@ -7,32 +7,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.avengers.luadingo.model.Friends_With;
+import com.avengers.luadingo.model.Friends_WithPK;
 import com.avengers.luadingo.repository.Friends_WithRepository;
 
 @Service
-public class Friends_WithServiceImp implements Friends_WithService{
-        
-            @Autowired
-            private  Friends_WithRepository Friends_WithRepository;
-            
-            @Override
-            public Friends_With save(Friends_With friendsWith) {
-                return Friends_WithRepository.save(friendsWith);
-            }
-        
-            @Override
-            public List<Friends_With> getAll() {
-                return Friends_WithRepository.findAll();
-                }
-        
-            @Override
-            public Friends_With get(String uname) {
-                    return Friends_WithRepository.getReferenceById(uname);
-            }
-        
-            @Override
-            public void delete(String uname) {
-                Friends_WithRepository.deleteById(uname);
-            }
-            
-        }
+public class Friends_WithServiceImp implements Friends_WithService {
+
+    @Autowired
+    private Friends_WithRepository Friends_WithRepository;
+
+    @Override
+    public Friends_With save(Friends_With friendsWith) {
+        return Friends_WithRepository.save(friendsWith);
+    }
+
+    @Override
+    public List<Friends_With> getAll() {
+        return Friends_WithRepository.findAll();
+    }
+
+    @Override
+    public Friends_With get(Friends_WithPK id) {
+        return Friends_WithRepository.getReferenceById(id);
+    }
+
+    @Override
+    public void delete(Friends_WithPK id) {
+        Friends_WithRepository.deleteById(id);
+    }
+
+}

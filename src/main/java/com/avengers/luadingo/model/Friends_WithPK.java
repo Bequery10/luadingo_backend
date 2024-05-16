@@ -1,8 +1,9 @@
 package com.avengers.luadingo.model;
 
 import java.io.Serializable;
-import jakarta.persistence.Embeddable;
+import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Friends_WithPK implements Serializable {
@@ -28,4 +29,20 @@ public class Friends_WithPK implements Serializable {
         this.username2 = username2;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(username1, username2);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Friends_WithPK other = (Friends_WithPK) obj;
+        return username1 == other.username1 && username2 == other.username2;
+    }
 }

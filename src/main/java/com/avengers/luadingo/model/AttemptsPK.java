@@ -1,12 +1,13 @@
 package com.avengers.luadingo.model;
 
 import java.io.Serializable;
-import jakarta.persistence.Embeddable;
+import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class AttemptsPK implements Serializable {
-    
+
     private int username;
     private int quiz_id;
     private int attempt_id;
@@ -42,6 +43,21 @@ public class AttemptsPK implements Serializable {
 
     public void setAttempt_id(int attempt_id) {
         this.attempt_id = attempt_id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        AttemptsPK that = (AttemptsPK) o;
+        return quiz_id == that.quiz_id && attempt_id == that.attempt_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, quiz_id, attempt_id);
     }
 
 }
