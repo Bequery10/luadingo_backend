@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`User` (
   `username` VARCHAR(50) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `level` ENUM('Beginner', 'Intermediate', 'Advanced') NOT NULL DEFAULT 'Beginner',
+  `level` ENUM('Beginner', 'Intermediate', 'Advanced','Admin') NOT NULL DEFAULT 'Beginner',
   PRIMARY KEY (`username`),
   UNIQUE INDEX `Email_UNIQUE` (`email` ASC) VISIBLE)
   ENGINE=InnoDB;
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Course` (
 CREATE TABLE IF NOT EXISTS `Luadingo`.`Friends_With` (
   `username1` VARCHAR(50) NOT NULL,
   `username2` VARCHAR(50) NOT NULL,
-  `status` ENUM('Pending', 'Accepted') NULL DEFAULT 'Pending',
+  `status` ENUM('Pending', 'Accepted') NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`username1`, `username2`),
   FOREIGN KEY(`username1`) REFERENCES User(`username`),
   FOREIGN KEY(`username2`) REFERENCES User(`username`))
