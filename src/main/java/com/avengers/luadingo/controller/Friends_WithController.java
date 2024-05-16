@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
+import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.service.Friends_WithService;
+import com.avengers.luadingo.model.Friends_With;
 import java.util.*;
 
 @RestController
@@ -18,8 +20,15 @@ public class Friends_WithController {
     @Autowired
     private Friends_WithService friends_withService;
 
-    @PostMapping("/add")
-    public String add(@RequestBody Friends_With friends_with) {
+    @PostMapping("/add/{username1}/{username2}")
+    public String add(@PathVariable String username1, @PathVariable String username2) {
+        Friends_WithPK friends_WithPK = new Friends_WithPK();
+        friends_WithPK.setUsername1(username1);
+        friends_WithPK.setUsername2(username2);
+
+        Friends_With friends_with = new Friends_With();
+        friends_with.setId(friends_WithPK);
+
         friends_withService.save(friends_with);
         return "New Friends_With is added";
     }
