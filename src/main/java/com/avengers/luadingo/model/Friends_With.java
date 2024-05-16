@@ -7,17 +7,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
-
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class Friends_With {
+
+    public enum Status {
+        PENDING,
+        ACCEPTED
+    }
+
     @EmbeddedId
     private Friends_WithPK id;
-    private String status;
+    private Status status;
 
     public Friends_With() {
-       
+
     }
 
     public Friends_WithPK getId() {
@@ -38,8 +43,10 @@ public class Friends_With {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Friends_With that = (Friends_With) o;
         return id.equals(that.id);
     }
