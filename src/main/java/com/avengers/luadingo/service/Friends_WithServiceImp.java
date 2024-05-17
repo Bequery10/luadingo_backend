@@ -27,13 +27,18 @@ public class Friends_WithServiceImp implements Friends_WithService {
     }
 
     @Override
-    public Friends_With get(String username) {
+    public List<Friends_With> get(String username) {
         return Friends_WithRepository.getReferenceById(username);
     }
 
     @Override
     public int delete(Friends_WithPK id) {
         return Friends_WithRepository.deleteById(id);
+    }
+
+    @Override
+    public int update(String username1, String username2, boolean accepted) {
+        return Friends_WithRepository.deleteById(username1, username2, accepted);
     }
 
 }

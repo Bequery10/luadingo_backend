@@ -42,26 +42,22 @@ public class Friends_WithController {
         return friends_withService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Friends_With> get(@PathVariable Friends_WithPK id) {
-        try {
-            Friends_With friends_with = friends_withService.get(id);
-            return new ResponseEntity<Friends_With>(friends_with, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Friends_With>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/{username}")
+    public List<Friends_With> get(@PathVariable String username) {
+        return friends_withService.get(username);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Friends_With> update(@RequestBody Friends_With friends_with,
-            @PathVariable Friends_WithPK id) {
-        try {
-            Friends_With existingFriends_With = friends_withService.get(id);
-            friends_withService.delete(id);
-            friends_withService.save(friends_with);
-            return new ResponseEntity<Friends_With>(friends_with, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Friends_With>(HttpStatus.NOT_FOUND);
-        }
-    }
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Friends_With> update(@RequestBody Friends_With
+    // friends_with,
+    // @PathVariable Friends_WithPK id) {
+    // try {
+    // Friends_With existingFriends_With = friends_withService.get(id);
+    // friends_withService.delete(id);
+    // friends_withService.save(friends_with);
+    // return new ResponseEntity<Friends_With>(friends_with, HttpStatus.OK);
+    // } catch (NoSuchElementException e) {
+    // return new ResponseEntity<Friends_With>(HttpStatus.NOT_FOUND);
+    // }
+    // }
 }
