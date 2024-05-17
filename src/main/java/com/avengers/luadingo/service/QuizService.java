@@ -16,4 +16,5 @@ public interface QuizService {
     public Quiz get(int quiz_id);
 
     public int delete(int quiz_id);
+
 }

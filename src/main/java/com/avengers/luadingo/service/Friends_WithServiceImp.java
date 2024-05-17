@@ -27,8 +27,8 @@ public class Friends_WithServiceImp implements Friends_WithService {
     }
 
     @Override
-    public Friends_With get(Friends_WithPK id) {
-        return Friends_WithRepository.getReferenceById(id);
+    public Friends_With get(String username) {
+        return Friends_WithRepository.getReferenceById(username);
     }
 
     @Override

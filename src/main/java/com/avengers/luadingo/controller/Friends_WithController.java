@@ -1,6 +1,5 @@
 package com.avengers.luadingo.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,11 @@ public class Friends_WithController {
 
         Friends_With friends_with = new Friends_With();
         friends_with.setId(friends_WithPK);
+
+        // String statusString = "Pending";
+        // Friends_With.Status status = Friends_With.Status.valueOf(statusString);
+
+        // friends_with.setStatus(status);
 
         friends_withService.save(friends_with);
         return "New Friends_With is added";

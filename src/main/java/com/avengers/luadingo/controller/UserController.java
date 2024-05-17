@@ -40,16 +40,11 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{username}")
-    public ResponseEntity<User> update(@RequestBody User user, @PathVariable String username) {
-        try {
-            User existingUser = userService.get(username);
-            userService.delete(username);
-            userService.save(user);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
+    @PutMapping("/update/{username}")
+    public int update(@RequestBody User user, @PathVariable String username) {
+        String newUername = user.getUsername();
+        String newPassword = user.getPassword();
+        return userService.update(newUername, newPassword, username);
     }
 
     @DeleteMapping("/{username}")

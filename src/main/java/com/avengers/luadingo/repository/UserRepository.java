@@ -38,6 +38,11 @@ public class UserRepository {
         return jdbcTemplate.update(sql, username);
     }
 
+    public int update(String newUsername, String newPassword, String oldUsername) {
+        String sql = "UPDATE User SET username = ?, password = ? WHERE username = ?";
+        return jdbcTemplate.update(sql, newUsername, newPassword, oldUsername);
+    }
+
     public boolean isExist(String username, String password) {
         String sql = "SELECT * FROM User u WHERE u.username = ? AND u.password = ?";
         try {

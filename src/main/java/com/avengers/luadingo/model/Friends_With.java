@@ -19,6 +19,7 @@ public class Friends_With {
 
     @EmbeddedId
     private Friends_WithPK id;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Friends_With() {
@@ -37,8 +38,8 @@ public class Friends_With {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(Status string) {
+        this.status = string;
     }
 
     @Override

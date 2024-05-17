@@ -16,7 +16,7 @@ public interface Friends_WithService {
 
     public List<Friends_With> getAll();
 
-    public Friends_With get(Friends_WithPK id);
+    public Friends_With get(String username);
 
     public int delete(Friends_WithPK id);
 }

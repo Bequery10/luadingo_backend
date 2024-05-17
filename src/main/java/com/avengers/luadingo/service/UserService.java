@@ -17,5 +17,7 @@ public interface UserService {
 
     public int delete(String username);
 
+    public int update(String newUsername, String newPassword, String olduserName);
+
     public boolean isExist(String username, String password);
 }

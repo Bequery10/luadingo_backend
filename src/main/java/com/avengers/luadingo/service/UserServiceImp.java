@@ -40,4 +40,9 @@ public class UserServiceImp implements UserService {
         return userRepository.isExist(username, password);
     }
 
+    @Override
+    public int update(String newUsername, String newPassword, String oldUsername) {
+        return userRepository.update(newUsername, newPassword, oldUsername);
+    }
+
 }
