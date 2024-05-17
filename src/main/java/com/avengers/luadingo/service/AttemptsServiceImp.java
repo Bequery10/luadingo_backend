@@ -17,7 +17,7 @@ public class AttemptsServiceImp implements AttemptsService {
     private AttemptsRepository attemptsRepository;
 
     @Override
-    public Attempts save(Attempts attempt) {
+    public int save(Attempts attempt) {
         return attemptsRepository.save(attempt);
     }
 
@@ -32,8 +32,8 @@ public class AttemptsServiceImp implements AttemptsService {
     }
 
     @Override
-    public void delete(AttemptsPK attempt_id) {
-        attemptsRepository.deleteById(attempt_id);
+    public int delete(AttemptsPK attempt_id) {
+        return attemptsRepository.deleteById(attempt_id);
     }
 
 }

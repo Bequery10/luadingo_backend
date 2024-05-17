@@ -12,11 +12,11 @@ import com.avengers.luadingo.repository.Has_OptionRepository;
 @Service
 public interface Has_OptionService {
 
-    public Has_Option save(Has_Option has_option);
+    public int save(Has_Option has_option);
 
     public List<Has_Option> getAll();
 
     public Has_Option get(Has_OptionPK option);
 
-    public void delete(Has_OptionPK option);
+    public int delete(Has_OptionPK option);
 }

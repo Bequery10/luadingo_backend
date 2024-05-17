@@ -10,29 +10,29 @@ import com.avengers.luadingo.model.Badge;
 import com.avengers.luadingo.repository.BadgeRepository;
 
 @Service
-public class BadgeServiceImp implements BadgeService{
+public class BadgeServiceImp implements BadgeService {
 
     @Autowired
-    private  BadgeRepository badgeRepository;
-    
+    private BadgeRepository badgeRepository;
+
     @Override
-    public Badge save(Badge badge) {
+    public int save(Badge badge) {
         return badgeRepository.save(badge);
     }
 
     @Override
     public List<Badge> getAll() {
         return badgeRepository.findAll();
-         }
+    }
 
     @Override
     public Badge get(int badge_id) {
-            return badgeRepository.getReferenceById(badge_id);
+        return badgeRepository.getReferenceById(badge_id);
     }
 
     @Override
-    public void delete(int badge_id) {
-        badgeRepository.deleteById(badge_id);
+    public int delete(int badge_id) {
+        return badgeRepository.deleteById(badge_id);
     }
-    
+
 }

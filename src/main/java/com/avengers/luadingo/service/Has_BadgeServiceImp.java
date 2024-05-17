@@ -17,7 +17,7 @@ public class Has_BadgeServiceImp implements Has_BadgeService {
     private Has_BadgeRepository has_badgeRepository;
 
     @Override
-    public Has_Badge save(Has_Badge has_badge) {
+    public int save(Has_Badge has_badge) {
         return has_badgeRepository.save(has_badge);
     }
 
@@ -32,8 +32,8 @@ public class Has_BadgeServiceImp implements Has_BadgeService {
     }
 
     @Override
-    public void delete(Has_BadgePK id) {
-        has_badgeRepository.deleteById(id);
+    public int delete(Has_BadgePK id) {
+        return has_badgeRepository.deleteById(id);
     }
 
 }

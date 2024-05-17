@@ -12,11 +12,11 @@ import com.avengers.luadingo.repository.Friends_WithRepository;
 @Service
 public interface Friends_WithService {
 
-    public Friends_With save(Friends_With friendsWith);
+    public int save(Friends_With friendsWith);
 
     public List<Friends_With> getAll();
 
     public Friends_With get(Friends_WithPK id);
 
-    public void delete(Friends_WithPK id);
+    public int delete(Friends_WithPK id);
 }

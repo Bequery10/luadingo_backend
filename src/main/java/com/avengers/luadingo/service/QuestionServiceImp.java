@@ -16,7 +16,7 @@ public class QuestionServiceImp implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public Question save(Question quiz) {
+    public int save(Question quiz) {
         return questionRepository.save(quiz);
     }
 
@@ -31,8 +31,8 @@ public class QuestionServiceImp implements QuestionService {
     }
 
     @Override
-    public void delete(int question_id) {
-        questionRepository.deleteById(question_id);
+    public int delete(int question_id) {
+        return questionRepository.deleteById(question_id);
     }
 
 }

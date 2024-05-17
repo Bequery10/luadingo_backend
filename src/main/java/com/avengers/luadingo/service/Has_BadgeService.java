@@ -12,11 +12,11 @@ import com.avengers.luadingo.repository.Has_BadgeRepository;
 @Service
 public interface Has_BadgeService {
 
-    public Has_Badge save(Has_Badge has_badge);
+    public int save(Has_Badge has_badge);
 
     public List<Has_Badge> getAll();
 
     public Has_Badge get(Has_BadgePK id);
 
-    public void delete(Has_BadgePK id);
+    public int delete(Has_BadgePK id);
 }

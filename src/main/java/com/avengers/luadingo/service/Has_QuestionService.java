@@ -13,11 +13,11 @@ import com.avengers.luadingo.repository.Has_QuestionRepository;
 
 public interface Has_QuestionService {
 
-    public Has_Question save(Has_Question has_question);
+    public int save(Has_Question has_question);
 
     public List<Has_Question> getAll();
 
     public Has_Question get(Has_QuestionPK id);
 
-    public void delete(Has_QuestionPK id);
+    public int delete(Has_QuestionPK id);
 }

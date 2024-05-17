@@ -17,7 +17,7 @@ public class Friends_WithServiceImp implements Friends_WithService {
     private Friends_WithRepository Friends_WithRepository;
 
     @Override
-    public Friends_With save(Friends_With friendsWith) {
+    public int save(Friends_With friendsWith) {
         return Friends_WithRepository.save(friendsWith);
     }
 
@@ -32,8 +32,8 @@ public class Friends_WithServiceImp implements Friends_WithService {
     }
 
     @Override
-    public void delete(Friends_WithPK id) {
-        Friends_WithRepository.deleteById(id);
+    public int delete(Friends_WithPK id) {
+        return Friends_WithRepository.deleteById(id);
     }
 
 }

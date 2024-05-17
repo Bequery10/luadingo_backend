@@ -17,7 +17,7 @@ public class Has_OptionServiceImp implements Has_OptionService {
     private Has_OptionRepository has_optionRepository;
 
     @Override
-    public Has_Option save(Has_Option has_option) {
+    public int save(Has_Option has_option) {
         return has_optionRepository.save(has_option);
     }
 
@@ -32,8 +32,8 @@ public class Has_OptionServiceImp implements Has_OptionService {
     }
 
     @Override
-    public void delete(Has_OptionPK id) {
-        has_optionRepository.deleteById(id);
+    public int delete(Has_OptionPK id) {
+        return has_optionRepository.deleteById(id);
     }
 
 }

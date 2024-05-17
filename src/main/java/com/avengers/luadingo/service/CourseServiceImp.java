@@ -10,29 +10,29 @@ import com.avengers.luadingo.model.Course;
 import com.avengers.luadingo.repository.CourseRepository;
 
 @Service
-public class CourseServiceImp implements CourseService{
+public class CourseServiceImp implements CourseService {
 
     @Autowired
-    private  CourseRepository courseRepository;
-    
+    private CourseRepository courseRepository;
+
     @Override
-    public Course save(Course course) {
+    public int save(Course course) {
         return courseRepository.save(course);
     }
 
     @Override
     public List<Course> getAll() {
         return courseRepository.findAll();
-         }
+    }
 
     @Override
     public Course get(int course_id) {
-            return courseRepository.getReferenceById(course_id);
+        return courseRepository.getReferenceById(course_id);
     }
 
     @Override
-    public void delete(int course_id) {
-        courseRepository.deleteById(course_id);
+    public int delete(int course_id) {
+        return courseRepository.deleteById(course_id);
     }
-    
+
 }

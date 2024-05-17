@@ -17,7 +17,7 @@ public class Has_QuestionServiceImp implements Has_QuestionService {
     private Has_QuestionRepository has_questionRepository;
 
     @Override
-    public Has_Question save(Has_Question has_question) {
+    public int save(Has_Question has_question) {
         return has_questionRepository.save(has_question);
     }
 
@@ -28,11 +28,11 @@ public class Has_QuestionServiceImp implements Has_QuestionService {
 
     @Override
     public Has_Question get(Has_QuestionPK id) {
-        return has_questionRepository.findById(id).get();
+        return has_questionRepository.getReferenceById(id);
     }
 
     @Override
-    public void delete(Has_QuestionPK id) {
-        has_questionRepository.deleteById(id);
+    public int delete(Has_QuestionPK id) {
+        return has_questionRepository.deleteById(id);
     }
 }

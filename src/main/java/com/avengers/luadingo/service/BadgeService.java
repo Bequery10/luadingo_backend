@@ -9,9 +9,12 @@ import com.avengers.luadingo.model.Badge;
 
 @Service
 public interface BadgeService {
-    
-    public Badge save(Badge badge);
+
+    public int save(Badge badge);
+
     public List<Badge> getAll();
+
     public Badge get(int badge_id);
-    public void delete(int badge_id);
+
+    public int delete(int badge_id);
 }
