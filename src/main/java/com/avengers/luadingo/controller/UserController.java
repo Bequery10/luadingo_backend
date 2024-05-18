@@ -60,8 +60,14 @@ public class UserController {
     }
 
     @GetMapping("/isExist/{username}:{password}")
-    public boolean isExist(@PathVariable String username, @PathVariable String password) {
-        return userService.isExist(username, password);
+    public int isExist(@PathVariable String username, @PathVariable String password) {
+        boolean b = userService.isExist(username, password);
+        if (b && userService.get(username).getLevel().equals(User.Level.Admin)) {
+            return 2;
+        } else if (b)
+            return 1;
+
+        return 0;
     }
 
     @GetMapping("/sort/badge")
