@@ -16,22 +16,29 @@ public class Has_QuizServiceImp implements Has_QuizService {
     private Has_QuizRepository has_quizRepository;
 
     @Override
-    public int save(Has_Quiz has_quiz) {
-        return has_quizRepository.save(has_quiz);
+    public int save(int quiz_id, int course_id) {
+
+        return has_quizRepository.save(quiz_id, course_id);
     }
 
     @Override
-    public List<Has_Quiz> getAll() {
+    public List<Has_QuizPK> findAll() {
         return has_quizRepository.findAll();
     }
 
     @Override
-    public Has_Quiz get(Has_QuizPK id) {
-        return has_quizRepository.getReferenceById(id);
+    public Has_QuizPK getCourse(int quiz_id) {
+        return has_quizRepository.getCourse(quiz_id);
     }
 
     @Override
-    public int delete(Has_QuizPK id) {
-        return has_quizRepository.deleteById(id);
+    public List<Has_QuizPK> getQuizzes(int course_id) {
+        return has_quizRepository.getQuizzes(course_id);
+    }
+
+    @Override
+    public int deleteById(int quiz_id, int course_id) {
+        has_quizRepository.deleteById(quiz_id, course_id);
+        return 1;
     }
 }

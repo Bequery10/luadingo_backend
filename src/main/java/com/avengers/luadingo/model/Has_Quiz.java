@@ -7,17 +7,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
-
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class Has_Quiz {
     @EmbeddedId
     private Has_QuizPK id;
 
     public Has_Quiz() {
-       
+
     }
 
     public Has_QuizPK getId() {
@@ -30,16 +28,17 @@ public class Has_Quiz {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Has_Quiz that = (Has_Quiz) o;
         return id.equals(that.id);
     }
-
 
     @Override
     public int hashCode() {
         return id.hashCode();
     }
-    
+
 }

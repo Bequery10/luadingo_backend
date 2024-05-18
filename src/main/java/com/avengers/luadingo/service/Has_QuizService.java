@@ -5,11 +5,13 @@ import com.avengers.luadingo.model.Has_Quiz;
 import com.avengers.luadingo.model.Has_QuizPK;
 
 public interface Has_QuizService {
-    int save(Has_Quiz has_quiz);
+    int save(int quiz_id, int course_id);
 
-    List<Has_Quiz> getAll();
+    List<Has_QuizPK> findAll();
 
-    Has_Quiz get(Has_QuizPK id);
+    Has_QuizPK getCourse(int quiz_id);
 
-    int delete(Has_QuizPK id);
+    List<Has_QuizPK> getQuizzes(int course_id);
+
+    int deleteById(int quiz_id, int course_id);
 }

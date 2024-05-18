@@ -19,45 +19,31 @@ public class Has_QuizController {
     private Has_QuizService has_quizService;
 
     @PostMapping("/add/{quiz_id}/{course_id}")
-    public String add(@RequestBody Has_Quiz has_quiz, @PathVariable int quiz_id, @PathVariable int course_id) {
-        Has_QuizPK id = new Has_QuizPK(quiz_id, course_id);
-        has_quiz.setId(id);
-        has_quizService.save(has_quiz);
+    public String add(@PathVariable int quiz_id, @PathVariable int course_id) {
+        has_quizService.save(quiz_id, course_id);
         return "New Has_Quiz is added";
     }
 
     @GetMapping("/getAll")
-    public List<Has_Quiz> getAllHas_Quizs() {
-        return has_quizService.getAll();
+    public List<Has_QuizPK> getAll() {
+        return has_quizService.findAll();
     }
 
-    @GetMapping("/{quiz_id}/{course_id}")
-    public ResponseEntity<Has_Quiz> get(@PathVariable int quiz_id, @PathVariable int course_id) {
+    @GetMapping("/course/{quiz_id}")
+    public ResponseEntity<Has_QuizPK> getCourse(@PathVariable int quiz_id) {
         try {
-            Has_QuizPK id = new Has_QuizPK(quiz_id, course_id);
-            Has_Quiz has_quiz = has_quizService.get(id);
-            return new ResponseEntity<Has_Quiz>(has_quiz, HttpStatus.OK);
+            Has_QuizPK has_quizPK = has_quizService.getCourse(quiz_id);
+            return new ResponseEntity<Has_QuizPK>(has_quizPK, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Quiz>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Has_QuizPK>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/{quiz_id}/{course_id}")
-    public ResponseEntity<Has_Quiz> update(@RequestBody Has_Quiz has_quiz, @PathVariable int quiz_id,
-            @PathVariable int course_id) {
-        try {
-            Has_QuizPK id = new Has_QuizPK(quiz_id, course_id);
-            Has_Quiz existingHas_Quiz = has_quizService.get(id);
-            if (existingHas_Quiz != null) {
-                has_quizService.delete(id);
-                has_quiz.setId(id);
-                has_quizService.save(has_quiz);
-                return new ResponseEntity<Has_Quiz>(has_quiz, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<Has_Quiz>(HttpStatus.NOT_FOUND);
-            }
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Quiz>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/quizzes/{course_id}")
+    public List<Has_QuizPK> getQuizz(@PathVariable int course_id) {
+
+        List<Has_QuizPK> has_quizzes = has_quizService.getQuizzes(course_id);
+        return has_quizzes;
     }
+
 }

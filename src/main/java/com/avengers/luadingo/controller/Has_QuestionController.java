@@ -1,6 +1,5 @@
 package com.avengers.luadingo.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import com.avengers.luadingo.model.Has_Question;
 import com.avengers.luadingo.model.Has_QuestionPK;
+
 import com.avengers.luadingo.service.Has_QuestionService;
 
 import java.util.*;
@@ -19,37 +19,31 @@ public class Has_QuestionController {
     @Autowired
     private Has_QuestionService has_questionService;
 
-    @PostMapping("/add")
-    public String add(@RequestBody Has_Question has_question) {
-        has_questionService.save(has_question);
-        return "New Has_Question is added";
+    @PostMapping("/add/{question_id}/{quiz_id}")
+    public String add(@PathVariable int question_id, @PathVariable int quiz_id) {
+        has_questionService.save(question_id, quiz_id);
+        return "New Has_question is added";
     }
 
     @GetMapping("/getAll")
-    public List<Has_Question> getAllHas_Questions() {
-        return has_questionService.getAll();
+    public List<Has_QuestionPK> getAll() {
+        return has_questionService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Has_Question> get(@PathVariable Has_QuestionPK id) {
+    @GetMapping("/quizzes/{question_id}")
+    public ResponseEntity<Has_QuestionPK> getquiz(@PathVariable int question_id) {
         try {
-            Has_Question has_question = has_questionService.get(id);
-            return new ResponseEntity<Has_Question>(has_question, HttpStatus.OK);
+            Has_QuestionPK has_questionPK = has_questionService.getquiz(question_id);
+            return new ResponseEntity<Has_QuestionPK>(has_questionPK, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Question>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Has_QuestionPK>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Has_Question> update(@RequestBody Has_Question has_question,
-            @PathVariable Has_QuestionPK id) {
-        try {
-            Has_Question existingHas_Question = has_questionService.get(id);
-            has_questionService.delete(id);
-            has_questionService.save(has_question);
-            return new ResponseEntity<Has_Question>(has_question, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Question>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/questions/{quiz_id}")
+    public List<Has_QuestionPK> getquestionz(@PathVariable int quiz_id) {
+
+        List<Has_QuestionPK> has_questionzes = has_questionService.getquestionzes(quiz_id);
+        return has_questionzes;
     }
 }

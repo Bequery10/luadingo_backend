@@ -64,4 +64,9 @@ public class UserController {
         return userService.isExist(username, password);
     }
 
+    @GetMapping("/sort/badge")
+    public List<User> sortByBadgeCount() {
+        return userService.sortByBadgeCount();
+    }
+
 }

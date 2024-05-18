@@ -17,22 +17,32 @@ public class Has_QuestionServiceImp implements Has_QuestionService {
     private Has_QuestionRepository has_questionRepository;
 
     @Override
-    public int save(Has_Question has_question) {
-        return has_questionRepository.save(has_question);
+    public int save(int question_id, int quiz_id) {
+        return has_questionRepository.save(question_id, quiz_id);
     }
 
     @Override
-    public List<Has_Question> getAll() {
+    public List<Has_QuestionPK> findAll() {
+        // TODO Auto-generated method stub
         return has_questionRepository.findAll();
     }
 
     @Override
-    public Has_Question get(Has_QuestionPK id) {
-        return has_questionRepository.getReferenceById(id);
+    public Has_QuestionPK getquiz(int question_id) {
+        // TODO Auto-generated method stub
+        return has_questionRepository.getquiz(question_id);
     }
 
     @Override
-    public int delete(Has_QuestionPK id) {
-        return has_questionRepository.deleteById(id);
+    public List<Has_QuestionPK> getquestionzes(int quiz_id) {
+        // TODO Auto-generated method stub
+        return has_questionRepository.getquestionzes(quiz_id);
     }
+
+    @Override
+    public int deleteById(int question_id, int quiz_id) {
+        // TODO Auto-generated method stub
+        return has_questionRepository.deleteById(question_id, quiz_id);
+    }
+
 }

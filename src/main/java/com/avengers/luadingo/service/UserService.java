@@ -13,6 +13,8 @@ public interface UserService {
 
     public List<User> getAll();
 
+    public List<User> sortByBadgeCount();
+
     public User get(String username);
 
     public int delete(String username);

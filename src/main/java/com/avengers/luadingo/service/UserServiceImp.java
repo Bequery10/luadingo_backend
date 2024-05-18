@@ -45,4 +45,9 @@ public class UserServiceImp implements UserService {
         return userRepository.update(newUsername, newPassword, oldUsername);
     }
 
+    @Override
+    public List<User> sortByBadgeCount() {
+        return userRepository.sortByBadgeCount();
+    }
+
 }
