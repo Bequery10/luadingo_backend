@@ -17,23 +17,28 @@ public class Has_BadgeServiceImp implements Has_BadgeService {
     private Has_BadgeRepository has_badgeRepository;
 
     @Override
-    public int save(Has_Badge has_badge) {
-        return has_badgeRepository.save(has_badge);
-    }
-
-    @Override
-    public List<Has_Badge> getAll() {
+    public List<Has_BadgePK> findAll() {
         return has_badgeRepository.findAll();
     }
 
     @Override
-    public Has_Badge get(Has_BadgePK id) {
-        return has_badgeRepository.getReferenceById(id);
+    public List<Has_BadgePK> getUserBadges(String username) {
+        return has_badgeRepository.getUserBadges(username);
     }
 
     @Override
-    public int delete(Has_BadgePK id) {
-        return has_badgeRepository.deleteById(id);
+    public int getUserBadgesCount(String username) {
+        return has_badgeRepository.getUserBadgesCount(username);
+    }
+
+    @Override
+    public int add(String username, int badge_id) {
+        return has_badgeRepository.add(username, badge_id);
+    }
+
+    @Override
+    public int deleteById(String username) {
+        return has_badgeRepository.deleteById(username);
     }
 
 }

@@ -7,16 +7,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
-
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class Has_Badge {
     @EmbeddedId
     private Has_BadgePK id;
 
     public Has_Badge() {
-    
+
     }
 
     public Has_BadgePK getId() {
@@ -29,8 +28,10 @@ public class Has_Badge {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Has_Badge that = (Has_Badge) o;
         return id.equals(that.id);
     }
@@ -41,5 +42,3 @@ public class Has_Badge {
     }
 
 }
-
-

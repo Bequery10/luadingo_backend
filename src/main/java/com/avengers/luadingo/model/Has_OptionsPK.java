@@ -5,14 +5,15 @@ import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 
-public class Has_OptionPK implements Serializable {
+@Embeddable
+public class Has_OptionsPK implements Serializable {
     private int question_id;
-    private int option;
+    private String option;
 
-    public Has_OptionPK() {
+    public Has_OptionsPK() {
     }
 
-    public Has_OptionPK(int question_id, int option) {
+    public Has_OptionsPK(int question_id, String option) {
         this.question_id = question_id;
         this.option = option;
     }
@@ -25,11 +26,11 @@ public class Has_OptionPK implements Serializable {
         this.question_id = question_id;
     }
 
-    public int getOption() {
+    public String getOption() {
         return option;
     }
 
-    public void setOption(int option) {
+    public void setOption(String option) {
         this.option = option;
     }
 
@@ -39,7 +40,7 @@ public class Has_OptionPK implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        Has_OptionPK that = (Has_OptionPK) o;
+        Has_OptionsPK that = (Has_OptionsPK) o;
         return question_id == that.question_id && option == that.option;
     }
 

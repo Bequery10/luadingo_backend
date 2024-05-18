@@ -15,24 +15,28 @@ public class Has_BadgeRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<Has_Badge> findAll() {
+    public List<Has_BadgePK> findAll() {
         String sql = "SELECT * FROM Has_Badge";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_Badge.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_BadgePK.class));
     }
 
-    public Has_Badge getReferenceById(Has_BadgePK id) {
-        String sql = "SELECT * FROM Has_Badge h WHERE h.id = ?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Has_Badge.class), id);
+    public List<Has_BadgePK> getUserBadges(String username) {
+        String sql = "SELECT name FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_BadgePK.class), username);
     }
 
-    public int save(Has_Badge hasBadge) {
-        Has_BadgePK id = hasBadge.getId();
-        String sql = "INSERT INTO Has_Badge (id) VALUES (?)";
-        return jdbcTemplate.update(sql, id);
+    public int getUserBadgesCount(String username) {
+        String sql = "SELECT COUNT(*) FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, username);
     }
 
-    public int deleteById(Has_BadgePK id) {
-        String sql = "DELETE FROM Has_Badge WHERE id = ?";
-        return jdbcTemplate.update(sql, id);
+    public int add(String username, int badge_id) {
+        String sql = "INSERT INTO Has_Badge username, badge_id VALUES username,badge_id";
+        return jdbcTemplate.update(sql, username, badge_id);
+    }
+
+    public int deleteById(String username) {
+        String sql = "DELETE FROM Has_Badge WHERE uesrname = ?";
+        return jdbcTemplate.update(sql, username);
     }
 }

@@ -1,6 +1,5 @@
 package com.avengers.luadingo.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +18,32 @@ public class AttemptsController {
     @Autowired
     private AttemptsService attemptsService;
 
-    @PostMapping("/add")
-    public String add(@RequestBody Attempts attempts) {
-        attemptsService.save(attempts);
-        return "New Attempts is added";
+    @PostMapping("/save/{current}")
+    public int save(@RequestBody AttemptsPK attemptsPK) {
+        String username = attemptsPK.getUsername();
+        int attempt_id = attemptsPK.getAttempt_id();
+        int quiz_id = attemptsPK.getQuiz_id();
+        int response = attemptsService.save(username, attempt_id, quiz_id);
+        return response;
     }
 
     @GetMapping("/getAll")
-    public List<Attempts> getAllAttempts() {
-        return attemptsService.getAll();
+    public List<AttemptsPK> getAllAttempts() {
+        return attemptsService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Attempts> get(@PathVariable AttemptsPK id) {
-        try {
-            Attempts attempts = attemptsService.get(id);
-            return new ResponseEntity<Attempts>(attempts, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Attempts>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/{username}")
+    public List<AttemptsPK> getUserAttempts(@PathVariable String username) {
+        return attemptsService.getUserAttempts(username);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Attempts> update(@RequestBody Attempts attempts, @PathVariable AttemptsPK id) {
-        try {
-            Attempts existingAttempts = attemptsService.get(id);
-            attemptsService.delete(id);
-            attemptsService.save(attempts);
-            return new ResponseEntity<Attempts>(attempts, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Attempts>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/{username}/{quiz_id}")
+    public List<AttemptsPK> getUserAttemptsForQuiz(@PathVariable String username, @PathVariable int quiz_id) {
+        return attemptsService.getUserAttemptsForQuiz(username, quiz_id);
+    }
+
+    @DeleteMapping("/delete")
+    public int delete(@RequestBody AttemptsPK id) {
+        return attemptsService.delete(id.getUsername(), id.getAttempt_id(), id.getQuiz_id());
     }
 }

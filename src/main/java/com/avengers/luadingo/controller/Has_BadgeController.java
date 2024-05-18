@@ -1,6 +1,5 @@
 package com.avengers.luadingo.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,36 +18,31 @@ public class Has_BadgeController {
     @Autowired
     private Has_BadgeService has_badgeService;
 
-    @PostMapping("/add")
-    public String add(@RequestBody Has_Badge has_badge) {
-        has_badgeService.save(has_badge);
-        return "New Has_Badge is added";
+    @PostMapping("/add/{username}/{badge_id}")
+    public ResponseEntity<String> add(@PathVariable String username, @PathVariable int badge_id) {
+        int result = has_badgeService.add(username, badge_id);
+        return new ResponseEntity<>("New Has_Badge is added, affected rows: " + result, HttpStatus.CREATED);
     }
 
     @GetMapping("/getAll")
-    public List<Has_Badge> getAllHas_Badges() {
-        return has_badgeService.getAll();
+    public List<Has_BadgePK> getAllHas_Badges() {
+        return has_badgeService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Has_Badge> get(@PathVariable Has_BadgePK id) {
-        try {
-            Has_Badge has_badge = has_badgeService.get(id);
-            return new ResponseEntity<Has_Badge>(has_badge, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Badge>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/getBadges/{username}")
+    public List<Has_BadgePK> getUserBadges(@PathVariable String username) {
+        return has_badgeService.getUserBadges(username);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Has_Badge> update(@RequestBody Has_Badge has_badge, @PathVariable Has_BadgePK id) {
-        try {
-            Has_Badge existingHas_Badge = has_badgeService.get(id);
-            has_badgeService.delete(id);
-            has_badgeService.save(has_badge);
-            return new ResponseEntity<Has_Badge>(has_badge, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            return new ResponseEntity<Has_Badge>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/getBadgesCount/{username}")
+    public ResponseEntity<Integer> getUserBadgesCount(@PathVariable String username) {
+        int count = has_badgeService.getUserBadgesCount(username);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{username}")
+    public ResponseEntity<String> deleteById(@PathVariable String username) {
+        int result = has_badgeService.deleteById(username);
+        return new ResponseEntity<>("Deleted Has_Badge, affected rows: " + result, HttpStatus.OK);
     }
 }

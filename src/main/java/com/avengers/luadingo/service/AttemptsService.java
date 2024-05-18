@@ -5,17 +5,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import com.avengers.luadingo.model.Attempts;
+import com.avengers.luadingo.model.Attempt;
 import com.avengers.luadingo.model.AttemptsPK;
 
-@Service
 public interface AttemptsService {
 
-    public int save(Attempts attempt);
+    List<AttemptsPK> findAll();
 
-    public List<Attempts> getAll();
+    List<AttemptsPK> getUserAttempts(String username);
 
-    public Attempts get(AttemptsPK attempt_id);
+    List<AttemptsPK> getUserAttemptsForQuiz(String username, int quiz_id);
 
-    public int delete(AttemptsPK attempt_id);
+    int save(String username, int attempt_id, int quiz_id);
+
+    int delete(String username, int attempt_id, int quiz_id);
+
 }

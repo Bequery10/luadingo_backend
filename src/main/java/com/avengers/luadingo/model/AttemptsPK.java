@@ -8,24 +8,24 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class AttemptsPK implements Serializable {
 
-    private int username;
+    private String username;
     private int quiz_id;
     private int attempt_id;
 
     public AttemptsPK() {
     }
 
-    public AttemptsPK(int username, int quiz_id, int attempt_id) {
+    public AttemptsPK(String username, int quiz_id, int attempt_id) {
         this.username = username;
         this.quiz_id = quiz_id;
         this.attempt_id = attempt_id;
     }
 
-    public int getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(int username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

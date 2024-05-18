@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 
+@Embeddable
 public class Has_QuizPK implements Serializable {
     private int quiz_id;
     private int course_id;

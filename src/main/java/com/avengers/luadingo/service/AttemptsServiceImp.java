@@ -17,23 +17,27 @@ public class AttemptsServiceImp implements AttemptsService {
     private AttemptsRepository attemptsRepository;
 
     @Override
-    public int save(Attempts attempt) {
-        return attemptsRepository.save(attempt);
-    }
-
-    @Override
-    public List<Attempts> getAll() {
+    public List<AttemptsPK> findAll() {
         return attemptsRepository.findAll();
     }
 
     @Override
-    public Attempts get(AttemptsPK attempt_id) {
-        return attemptsRepository.getReferenceById(attempt_id);
+    public List<AttemptsPK> getUserAttempts(String username) {
+        return attemptsRepository.getUserAttempts(username);
     }
 
     @Override
-    public int delete(AttemptsPK attempt_id) {
-        return attemptsRepository.deleteById(attempt_id);
+    public List<AttemptsPK> getUserAttemptsForQuiz(String username, int quiz_id) {
+        return attemptsRepository.getUserAttemptsForQuiz(username, quiz_id);
     }
 
+    @Override
+    public int save(String username, int attempt_id, int quiz_id) {
+        return attemptsRepository.save(username, attempt_id, quiz_id);
+    }
+
+    @Override
+    public int delete(String username, int attempt_id, int quiz_id) {
+        return attemptsRepository.delete(username, attempt_id, quiz_id);
+    }
 }
