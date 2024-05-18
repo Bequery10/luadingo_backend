@@ -1,22 +1,24 @@
 package com.avengers.luadingo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
-
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
-import com.avengers.luadingo.repository.Friends_WithRepository;
 
-@Service
+import java.util.List;
+
 public interface Friends_WithService {
+    List<Friends_WithPK> getAll();
 
-    public int save(Friends_With friendsWith);
+    List<Friends_WithPK> getFriends(String username);
 
-    public List<Friends_With> getAll();
+    Friends_With getFriendShip(String username1, String username2);
 
-    public List<Friends_With> get(String username);
+    int save(Friends_With friendsWith);
 
-    public int delete(Friends_WithPK id);
+    int accept(String username1, String username2);
+
+    int deleteById(String username1, String username2);
+
+    int addFriend(String username1, String username2);
+
+    List<Friends_WithPK> getRequests(String username1);
 }
