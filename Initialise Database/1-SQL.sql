@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Friends_With` (
   `username2` VARCHAR(50) NOT NULL,
   `status` ENUM('Pending', 'Accepted') NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`username1`, `username2`),
-  FOREIGN KEY(`username1`) REFERENCES User(`username`),
-  FOREIGN KEY(`username2`) REFERENCES User(`username`))
+  FOREIGN KEY(`username1`) REFERENCES User(`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`username2`) REFERENCES User(`username`) ON UPDATE CASCADE ON DELETE CASCADE)
   ENGINE=InnoDB;
 
 
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Badge` (
   `username` VARCHAR(50) NOT NULL,
   `badge_id` INT NOT NULL,
   PRIMARY KEY (`username`, `badge_id`),
-  FOREIGN KEY(`username`) REFERENCES User(`username`),
-  FOREIGN KEY(`badge_id`) REFERENCES Badge(`badge_id`))
+  FOREIGN KEY(`username`) REFERENCES User(`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`badge_id`) REFERENCES Badge(`badge_id`) ON UPDATE CASCADE ON DELETE CASCADE)
   ENGINE=InnoDB;
 
 
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Options` (
   `question_id` INT AUTO_INCREMENT NOT NULL,
   `choice` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`question_id`, `choice`),
-  FOREIGN KEY(`question_id`) REFERENCES Question(`question_id`))
+  FOREIGN KEY(`question_id`) REFERENCES Question(`question_id`) ON UPDATE CASCADE ON DELETE CASCADE)
   ENGINE=InnoDB;
 
 
@@ -125,8 +125,8 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Question` (
   `quiz_id` INT NOT NULL,
   `question_id` INT NOT NULL,
   PRIMARY KEY (`quiz_id`, `question_id`),
-  FOREIGN KEY(`question_id`) REFERENCES Question(`question_id`),
-  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`))
+  FOREIGN KEY(`question_id`) REFERENCES Question(`question_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`) ON UPDATE CASCADE ON DELETE CASCADE)
   ENGINE=InnoDB;
 
 
@@ -138,8 +138,8 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Has_Quiz` (
   `course_id` INT NOT NULL,
   `quiz_id` INT NOT NULL,
   PRIMARY KEY (`course_id`, `quiz_id`),
-  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`),
-  FOREIGN KEY(`course_id`) REFERENCES Course(`course_id`)
+  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`course_id`) REFERENCES Course(`course_id`) ON UPDATE CASCADE ON DELETE CASCADE
   )
    ENGINE=InnoDB;
 
@@ -152,9 +152,9 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Attempts` (
   `quiz_id` INT NOT NULL,
   `username` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`attempt_id`, `quiz_id`,`username`),
-  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`),
-  FOREIGN KEY(`attempt_id`) REFERENCES Attempt(`attempt_id`),
-  FOREIGN KEY(`username`) REFERENCES User(`username`)
+  FOREIGN KEY(`quiz_id`) REFERENCES Quiz(`quiz_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`attempt_id`) REFERENCES Attempt(`attempt_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY(`username`) REFERENCES User(`username`) ON UPDATE CASCADE ON DELETE CASCADE
   )
    ENGINE=InnoDB;
 
