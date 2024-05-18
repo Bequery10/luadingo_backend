@@ -6,6 +6,7 @@ import org.hibernate.resource.beans.container.internal.NoSuchBeanException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.avengers.luadingo.model.Badge;
 import com.avengers.luadingo.model.Has_Badge;
 import com.avengers.luadingo.model.Has_BadgePK;
 import com.avengers.luadingo.repository.Has_BadgeRepository;
@@ -22,7 +23,7 @@ public class Has_BadgeServiceImp implements Has_BadgeService {
     }
 
     @Override
-    public List<Has_BadgePK> getUserBadges(String username) {
+    public List<Badge> getUserBadges(String username) {
         return has_badgeRepository.getUserBadges(username);
     }
 

@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
+import com.avengers.luadingo.model.User;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,12 +24,13 @@ public class Friends_WithRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Friends_WithPK.class));
     }
 
-    public List<Friends_WithPK> getFriends(String username) {
+    public List<User> getFriends(String username) {
 
-        String sql = "SELECT username1 FROM Friends_With f WHERE f.username2 = ? AND status = 'Accepted' " +
+        String sql = "SELECT * from USER WHERE username IN (SELECT username1 FROM Friends_With f WHERE f.username2 = ? AND status = 'Accepted' "
+                +
                 "UNION " +
-                "SELECT username2 FROM Friends_With f WHERE f.username1 = ? AND status = 'Accepted'";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Friends_WithPK.class), username, username);
+                "SELECT username2 FROM Friends_With f WHERE f.username1 = ? AND status = 'Accepted' )";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), username, username);
     }
 
     public Friends_With getFriendShip(String username1, String username2) {

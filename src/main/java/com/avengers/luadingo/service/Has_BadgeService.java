@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import com.avengers.luadingo.model.Badge;
 import com.avengers.luadingo.model.Has_Badge;
 import com.avengers.luadingo.model.Has_BadgePK;
 import com.avengers.luadingo.repository.Has_BadgeRepository;
@@ -14,7 +15,7 @@ public interface Has_BadgeService {
 
     List<Has_BadgePK> findAll();
 
-    List<Has_BadgePK> getUserBadges(String username);
+    List<Badge> getUserBadges(String username);
 
     int getUserBadgesCount(String username);
 

@@ -2,6 +2,7 @@ package com.avengers.luadingo.controller;
 
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
+import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.service.Friends_WithService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class Friends_WithController {
     }
 
     @GetMapping("/friends/{username}")
-    public List<Friends_WithPK> getFriends(@PathVariable String username) {
+    public List<User> getFriends(@PathVariable String username) {
         return friends_withService.getFriends(username);
     }
 

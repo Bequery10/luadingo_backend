@@ -2,6 +2,7 @@ package com.avengers.luadingo.service;
 
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
+import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.repository.Friends_WithRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class Friends_WithServiceImp implements Friends_WithService {
     }
 
     @Override
-    public List<Friends_WithPK> getFriends(String username) {
+    public List<User> getFriends(String username) {
         return friendsWithRepository.getFriends(username);
     }
 

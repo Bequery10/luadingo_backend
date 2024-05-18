@@ -2,13 +2,14 @@ package com.avengers.luadingo.service;
 
 import com.avengers.luadingo.model.Friends_With;
 import com.avengers.luadingo.model.Friends_WithPK;
+import com.avengers.luadingo.model.User;
 
 import java.util.List;
 
 public interface Friends_WithService {
     List<Friends_WithPK> getAll();
 
-    List<Friends_WithPK> getFriends(String username);
+    List<User> getFriends(String username);
 
     Friends_With getFriendShip(String username1, String username2);
 

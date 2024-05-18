@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
+import com.avengers.luadingo.model.Badge;
 import com.avengers.luadingo.model.Has_Badge;
 import com.avengers.luadingo.model.Has_BadgePK;
 import com.avengers.luadingo.service.Has_BadgeService;
@@ -30,7 +31,7 @@ public class Has_BadgeController {
     }
 
     @GetMapping("/getBadges/{username}")
-    public List<Has_BadgePK> getUserBadges(@PathVariable String username) {
+    public List<Badge> getUserBadges(@PathVariable String username) {
         return has_badgeService.getUserBadges(username);
     }
 

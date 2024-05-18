@@ -2,6 +2,7 @@ package com.avengers.luadingo.repository;
 
 import java.util.List;
 
+import com.avengers.luadingo.model.Badge;
 import com.avengers.luadingo.model.Has_Badge;
 import com.avengers.luadingo.model.Has_BadgePK;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,9 +21,9 @@ public class Has_BadgeRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_BadgePK.class));
     }
 
-    public List<Has_BadgePK> getUserBadges(String username) {
-        String sql = "SELECT name FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_BadgePK.class), username);
+    public List<Badge> getUserBadges(String username) {
+        String sql = "SELECT * FROM Badge where badge_id IN (SELECT badge_name FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?)";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Badge.class), username);
     }
 
     public int getUserBadgesCount(String username) {
