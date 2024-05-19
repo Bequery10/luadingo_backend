@@ -1,15 +1,13 @@
 package com.avengers.luadingo.controller;
 
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.service.UserService;
-
-import jakarta.websocket.server.PathParam;
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/user")
@@ -41,31 +39,29 @@ public class UserController {
 
     @PutMapping("/update/{username}")
     public int update(@RequestBody User user, @PathVariable String username) {
-        String newUername = user.getUsername();
+        String newUsername = user.getUsername();
         String newPassword = user.getPassword();
-        return userService.update(newUername, newPassword, username);
+        return userService.update(newUsername, newPassword, username);
     }
 
     @DeleteMapping("/{username}")
     public String delete(@PathVariable String username) {
-
         User existingUser = userService.get(username);
 
         if (existingUser == null)
             return "user with username: " + username + " not found.";
         userService.delete(username);
         return "Deleted user with username: " + username;
-
     }
 
     @GetMapping("/isExist/{username}:{password}")
     public int isExist(@PathVariable String username, @PathVariable String password) {
-        boolean b = userService.isExist(username, password);
-        if (b && userService.get(username).getLevel().equals(User.Level.Admin)) {
+        boolean exists = userService.isExist(username, password);
+        if (exists && userService.get(username).getLevel().equals(User.Level.Admin)) {
             return 2;
-        } else if (b)
+        } else if (exists) {
             return 1;
-
+        }
         return 0;
     }
 
@@ -73,10 +69,13 @@ public class UserController {
     public List<User> sortByBadgeCount() {
         return userService.sortByBadgeCount();
     }
+<<<<<<< Updated upstream
 
     @PostMapping("/code")
     public Map<String, Object> runSqlCommand(@RequestBody String sqlCommand) {
         return userService.executeSqlCommand(sqlCommand);
     }
 
+=======
+>>>>>>> Stashed changes
 }

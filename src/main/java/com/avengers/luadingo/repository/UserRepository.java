@@ -28,11 +28,8 @@ public class UserRepository {
     }
 
     public int save(User user) {
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String email = user.getEmail();
         String sql = "INSERT INTO User (username, password, email) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, username, password, email);
+        return jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail());
     }
 
     public int deleteById(String username) {
@@ -48,7 +45,7 @@ public class UserRepository {
     public boolean isExist(String username, String password) {
         String sql = "SELECT * FROM User u WHERE u.username = ? AND u.password = ?";
         try {
-            User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+            jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
             return true;
         } catch (EmptyResultDataAccessException e) {
             return false;
@@ -56,8 +53,7 @@ public class UserRepository {
     }
 
     public List<User> sortByBadgeCount() {
-        String countSql = "(SELECT COUNT(*) FROM Has_Badge WHERE Has_Badge.username = User.username)";
-        String sql = "SELECT * FROM User ORDER BY " + countSql;
+        String sql = "SELECT * FROM User ORDER BY (SELECT COUNT(*) FROM Has_Badge WHERE Has_Badge.username = User.username)";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
