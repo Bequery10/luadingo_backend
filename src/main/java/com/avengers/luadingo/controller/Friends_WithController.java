@@ -29,7 +29,7 @@ public class Friends_WithController {
         return friends_withService.getFriends(username);
     }
 
-    @PutMapping("/send/{username1}/{username2}")
+    @PostMapping("/send/{username1}/{username2}")
     public ResponseEntity<?> sendRequest(@PathVariable String username1, @PathVariable String username2) {
         try {
             int result = friends_withService.addFriend(username1, username2);

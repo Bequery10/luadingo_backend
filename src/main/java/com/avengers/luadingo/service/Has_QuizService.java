@@ -11,7 +11,7 @@ public interface Has_QuizService {
 
     Has_QuizPK getCourse(int quiz_id);
 
-    List<Has_QuizPK> getQuizzes(int course_id);
+    List<Has_Quiz> getQuizzes(int course_id);
 
     int deleteById(int quiz_id, int course_id);
 }

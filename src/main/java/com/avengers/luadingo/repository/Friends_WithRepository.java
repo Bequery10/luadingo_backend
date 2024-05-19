@@ -61,7 +61,7 @@ public class Friends_WithRepository {
     public int deleteById(String username1, String username2) {
 
         String sql = "DELETE FROM Friends_With WHERE username1= ? AND username2 = ?";
-        return jdbcTemplate.update(sql, username1, username2);
+        return jdbcTemplate.update(sql, username2, username1);
     }
 
     public List<Friends_WithPK> getRequests(String username) {

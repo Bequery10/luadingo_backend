@@ -32,7 +32,7 @@ public class Has_QuizServiceImp implements Has_QuizService {
     }
 
     @Override
-    public List<Has_QuizPK> getQuizzes(int course_id) {
+    public List<Has_Quiz> getQuizzes(int course_id) {
         return has_quizRepository.getQuizzes(course_id);
     }
 
