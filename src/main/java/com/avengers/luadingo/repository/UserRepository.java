@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserRepository {
@@ -59,4 +61,18 @@ public class UserRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 
+    public Map<String, Object> executeSqlCommand(String sql) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            if (sql.trim().toLowerCase().startsWith("select")) {
+                result.put("result", jdbcTemplate.queryForList(sql));
+            } else {
+                int updateCount = jdbcTemplate.update(sql);
+                result.put("result", updateCount + " row(s) affected.");
+            }
+        } catch (Exception e) {
+            result.put("error", e.getMessage());
+        }
+        return result;
+    }
 }

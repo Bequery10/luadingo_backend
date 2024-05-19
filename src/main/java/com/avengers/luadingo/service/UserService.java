@@ -22,4 +22,6 @@ public interface UserService {
     public int update(String newUsername, String newPassword, String olduserName);
 
     public boolean isExist(String username, String password);
+
+    public Map<String, Object> executeSqlCommand(String sql);
 }

@@ -1,6 +1,7 @@
 package com.avengers.luadingo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.resource.beans.container.internal.NoSuchBeanException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class UserServiceImp implements UserService {
     @Override
     public List<User> sortByBadgeCount() {
         return userRepository.sortByBadgeCount();
+    }
+
+    @Override
+    public Map<String, Object> executeSqlCommand(String sql) {
+        return userRepository.executeSqlCommand(sql);
     }
 
 }

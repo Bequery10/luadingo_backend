@@ -3,7 +3,6 @@ package com.avengers.luadingo.controller;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 
 import com.avengers.luadingo.model.User;
@@ -73,6 +72,11 @@ public class UserController {
     @GetMapping("/sort/badge")
     public List<User> sortByBadgeCount() {
         return userService.sortByBadgeCount();
+    }
+
+    @PostMapping("/code")
+    public Map<String, Object> runSqlCommand(@RequestBody Map<String, String> sqlCommand) {
+        return userService.executeSqlCommand(sqlCommand.get("sql"));
     }
 
 }
