@@ -56,7 +56,7 @@ public class AttemptsRepository {
             return 1;
 
         String sql = "SELECT COUNT(*) " +
-                "FROM (SELECT quiz_id FROM courses JOIN attempts ON courses.quiz_id = attempts.quiz_id WHERE course_id = ?) AS subquery";
+                "FROM (SELECT quiz_id FROM course JOIN attempts ON course.quiz_id = attempts.quiz_id WHERE course_id = ?) AS subquery";
         int count = jdbcTemplate.queryForObject(sql, Integer.class, course_id);
         if (count == 2) {
             String sql1 = "INSERT INTO badge (column_name) " +
