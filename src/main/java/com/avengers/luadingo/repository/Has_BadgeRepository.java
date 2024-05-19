@@ -22,12 +22,12 @@ public class Has_BadgeRepository {
     }
 
     public List<Badge> getUserBadges(String username) {
-        String sql = "SELECT * FROM Badge where badge_id IN (SELECT badge_name FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?)";
+        String sql = "SELECT * FROM badge AS b, has_badge AS hb WHERE b.badge_id = hb.badge_id AND hb.username = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Badge.class), username);
     }
 
     public int getUserBadgesCount(String username) {
-        String sql = "SELECT COUNT(*) FROM Badge b JOIN Has_Badge hb ON b.badge_id = hb.badge_id WHERE hb.username = ?";
+        String sql = "SELECT COUNT(*) FROM badge AS b, has_badge AS hb WHERE b.badge_id = hb.badge_id AND hb.username = ?;";
         return jdbcTemplate.queryForObject(sql, Integer.class, username);
     }
 
