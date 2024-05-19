@@ -50,6 +50,7 @@ public class AttemptsRepository {
     public int earnBadge(String username, int quiz_id) {
         String sql = "SELECT COUNT(*) FROM attempt a join (attempts a JOIN has_quiz q ON a.quiz_id = q.quiz_id WHERE a.username = ? AND a.quiz_id = ?) t on a.attempt_id=t.attempt_id WHERE a.current==5";
         int count = jdbcTemplate.queryForObject(sql, Integer.class, username, quiz_id);
+        System.out.println("--------------" + count);
         if (count == 2) {
             String sql1 = "SELECT b.badge_id " + //
                     "FROM has_course AS hc, badge AS b, course AS c " + //
