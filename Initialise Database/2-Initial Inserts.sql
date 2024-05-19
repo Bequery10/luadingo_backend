@@ -6,7 +6,7 @@ USE Luadingo;
 
 -- INITIAL ADMIN
 
-INSERT INTO user(username, email, password, level) VALUE ('TheUltimateAvenger', 'nothingCanStopUs', 'theultavenger@gmail.com', 'Admin');
+INSERT INTO user(username, email, password, level) VALUE ('TheUltimateAvenger', 'theultavenger@gmail.com', 'nothingCanStopUs', 'Admin');
 
 -- COURSES
 -- 1=Turkish 2=Azerbaijani 3=German 4=Russian 5=English
@@ -18,7 +18,7 @@ INSERT INTO course(course_name,course_language) VALUE ('Learn Russian!', 'Russia
 INSERT INTO course(course_name,course_language) VALUE ('Learn Spanish!', 'Spanish'); -- 4
 
 -- QUIZZES
--- 1-5 Turkish 6-10 Azer 11-15 German 16-20 Russian 21 - 25 English
+-- 1-5 Turkish 6-10 Azer 11-15 Russian 15 - 20 Spanish
 
 INSERT INTO quiz(quiz_title) VALUE ('Turkish Part I'); -- 1
 INSERT INTO has_quiz(course_id,quiz_id) VALUE(1,1);
@@ -64,3 +64,16 @@ INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,19);
 INSERT INTO quiz(quiz_title) VALUE ('Spanish Part V'); -- 20
 INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,20);
 
+
+-- BADGES
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 1','Turkish','badgeImages/Turkish1.png');
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 2','Turkish','badgeImages/Turkish2.png');
+
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 1','Azerbaijani','badgeImages/Azerbaijani1.png');
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 2','Azerbaijani','badgeImages/Azerbaijani2.png');
+
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Russian 1','Russian','badgeImages/Russian1.png');
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Russian 2','Russian','badgeImages/Russian2.png');
+
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 1','Spanish','badgeImages/Spanish1.png');
+INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 2','Spanish','badgeImages/Spanish2.png');
