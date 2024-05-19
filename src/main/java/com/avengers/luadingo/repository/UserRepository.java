@@ -62,6 +62,10 @@ public class UserRepository {
     }
 
     public Map<String, Object> executeSqlCommand(String sql) {
+        if (sql == null) {
+            throw new IllegalArgumentException("SQL command cannot be null");
+        }
+
         Map<String, Object> result = new HashMap<>();
         try {
             if (sql.trim().toLowerCase().startsWith("select")) {
@@ -73,6 +77,8 @@ public class UserRepository {
         } catch (Exception e) {
             result.put("error", e.getMessage());
         }
+        System.out.println(result);
         return result;
     }
+
 }

@@ -75,8 +75,8 @@ public class UserController {
     }
 
     @PostMapping("/code")
-    public Map<String, Object> runSqlCommand(@RequestBody Map<String, String> sqlCommand) {
-        return userService.executeSqlCommand(sqlCommand.get("sql"));
+    public Map<String, Object> runSqlCommand(@RequestBody String sqlCommand) {
+        return userService.executeSqlCommand(sqlCommand);
     }
 
 }
