@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 
 import com.avengers.luadingo.model.Attempt;
 import com.avengers.luadingo.service.AttemptService;
+import com.avengers.luadingo.service.AttemptsService;
 
 import java.util.*;
 
@@ -18,10 +19,14 @@ public class AttemptController {
     @Autowired
     private AttemptService attemptService;
 
-    @PostMapping("/add")
-    public String add(@RequestBody Attempt attempt) {
-        attemptService.save(attempt);
-        return "New Attempt is added";
+    @Autowired
+    private AttemptsService attemptsService;
+
+    @PostMapping("/add/{username}/{quiz_id}")
+    public int add(@RequestBody Attempt attempt, @PathVariable String username, @PathVariable int quiz_id) {
+        Attempt attempt1 = attemptService.save(attempt);
+        return attemptsService.save(username, attempt1.getAttempt_id(), quiz_id);
+
     }
 
     @GetMapping("/getAll")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.avengers.luadingo.model.Has_Question;
 import com.avengers.luadingo.model.Has_QuestionPK;
+import com.avengers.luadingo.model.Question;
 import com.avengers.luadingo.model.Has_QuestionPK;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,9 +28,9 @@ public class Has_QuestionRepository {
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Has_QuestionPK.class), question_id);
     }
 
-    public List<Has_QuestionPK> getquestionzes(int quiz_id) {
-        String sql = "SELECT question_id FROM Has_question  WHERE quiz_id = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_QuestionPK.class), quiz_id);
+    public List<Question> getquestionzes(int quiz_id) {
+        String sql = "SELECT * FROM Question WHERE question_id IN (SELECT question_id FROM Has_question  WHERE quiz_id = ?)";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Question.class), quiz_id);
     }
 
     public int save(int question_id, int quiz_id) {

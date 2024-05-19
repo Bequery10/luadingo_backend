@@ -40,10 +40,10 @@ public class Has_QuizController {
     }
 
     @GetMapping("/quizzes/{course_id}")
-    public List<Has_Quiz> getQuizz(@PathVariable int course_id) {
+    public List<Has_QuizPK> getQuizz(@PathVariable int course_id) {
 
-        List<Has_Quiz> has_quizzes = has_quizService.getQuizzes(course_id);
-        return has_quizzes;
+        return has_quizService.getQuizzes(course_id);
+
     }
 
 }

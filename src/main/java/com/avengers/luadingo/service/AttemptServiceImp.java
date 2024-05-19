@@ -16,7 +16,7 @@ public class AttemptServiceImp implements AttemptService {
     private AttemptRepository attemptRepository;
 
     @Override
-    public int save(Attempt attempt) {
+    public Attempt save(Attempt attempt) {
         return attemptRepository.save(attempt);
     }
 

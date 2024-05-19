@@ -9,7 +9,7 @@ import com.avengers.luadingo.model.Attempt;
 
 public interface AttemptService {
 
-    public int save(Attempt attempt);
+    public Attempt save(Attempt attempt);
 
     public List<Attempt> getAll();
 

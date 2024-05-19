@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import com.avengers.luadingo.model.Has_Question;
 import com.avengers.luadingo.model.Has_QuestionPK;
-
+import com.avengers.luadingo.model.Question;
 import com.avengers.luadingo.service.Has_QuestionService;
 
 import java.util.*;
@@ -41,9 +41,9 @@ public class Has_QuestionController {
     }
 
     @GetMapping("/questions/{quiz_id}")
-    public List<Has_QuestionPK> getquestionz(@PathVariable int quiz_id) {
+    public List<Question> getquestionz(@PathVariable int quiz_id) {
 
-        List<Has_QuestionPK> has_questionzes = has_questionService.getquestionzes(quiz_id);
-        return has_questionzes;
+        return has_questionService.getquestionzes(quiz_id);
+
     }
 }

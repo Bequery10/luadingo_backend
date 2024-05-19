@@ -25,9 +25,9 @@ public class Has_QuizRepository {
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Has_QuizPK.class), quiz_id);
     }
 
-    public List<Has_Quiz> getQuizzes(int course_id) {
+    public List<Has_QuizPK> getQuizzes(int course_id) {
         String sql = "SELECT * FROM Has_Quiz  WHERE course_id = ?";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_Quiz.class), course_id);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Has_QuizPK.class), course_id);
     }
 
     public int save(int quiz_id, int course_id) {

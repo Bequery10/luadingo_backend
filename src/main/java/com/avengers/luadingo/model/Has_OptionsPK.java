@@ -8,14 +8,14 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Has_OptionsPK implements Serializable {
     private int question_id;
-    private String option;
+    private String choice;
 
     public Has_OptionsPK() {
     }
 
-    public Has_OptionsPK(int question_id, String option) {
+    public Has_OptionsPK(int question_id, String choice) {
         this.question_id = question_id;
-        this.option = option;
+        this.choice = choice;
     }
 
     public int getQuestion_id() {
@@ -26,12 +26,12 @@ public class Has_OptionsPK implements Serializable {
         this.question_id = question_id;
     }
 
-    public String getOption() {
-        return option;
+    public String getChoice() {
+        return choice;
     }
 
-    public void setOption(String option) {
-        this.option = option;
+    public void setChoice(String choice) {
+        this.choice = choice;
     }
 
     @Override
@@ -41,11 +41,11 @@ public class Has_OptionsPK implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         Has_OptionsPK that = (Has_OptionsPK) o;
-        return question_id == that.question_id && option == that.option;
+        return question_id == that.question_id && choice == that.choice;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(question_id, option);
+        return Objects.hash(question_id, choice);
     }
 }

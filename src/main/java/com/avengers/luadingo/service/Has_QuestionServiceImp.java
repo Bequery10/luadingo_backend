@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.avengers.luadingo.model.Has_Question;
 import com.avengers.luadingo.model.Has_QuestionPK;
+import com.avengers.luadingo.model.Question;
 import com.avengers.luadingo.repository.Has_QuestionRepository;
 
 @Service
@@ -34,7 +35,7 @@ public class Has_QuestionServiceImp implements Has_QuestionService {
     }
 
     @Override
-    public List<Has_QuestionPK> getquestionzes(int quiz_id) {
+    public List<Question> getquestionzes(int quiz_id) {
         // TODO Auto-generated method stub
         return has_questionRepository.getquestionzes(quiz_id);
     }

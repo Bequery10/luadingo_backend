@@ -27,17 +27,23 @@ public class AttemptRepository {
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Attempt.class), id);
     }
 
-    public int save(Attempt attempt) {
-        int id = attempt.getAttempt_id();
+    public Attempt save(Attempt attempt) {
         int current = attempt.getAttempt_current();
         int score = attempt.getAttempt_score();
-        LocalDate timestamp = attempt.getAttempt_timestamp();
-        String sql = "INSERT INTO Attempt (attempt_id, attempt_current, attempt_score, attempt_timestamp) VALUES (?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, id, current, score, timestamp);
+        int id = getCount() + 1;
+        String sql = "INSERT INTO Attempt (attempt_id, attempt_current, attempt_score) VALUES ( ?, ?, ?)";
+        jdbcTemplate.update(sql, id, current, score);
+
+        return getReferenceById(id);
     }
 
     public int deleteById(int id) {
         String sql = "DELETE FROM Attempt WHERE attempt_id = ?";
         return jdbcTemplate.update(sql, id);
+    }
+
+    public int getCount() {
+        String sql = "SELECT COUNT(*) FROM Attempt";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 }
