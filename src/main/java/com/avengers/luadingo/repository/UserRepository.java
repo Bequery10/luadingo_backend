@@ -53,7 +53,8 @@ public class UserRepository {
     }
 
     public List<User> sortByBadgeCount() {
-        String sql = "SELECT * FROM User ORDER BY (SELECT COUNT(*) FROM Has_Badge WHERE Has_Badge.username = User.username)";
+        String countSql = "(SELECT COUNT(*) FROM Has_Badge WHERE Has_Badge.username = User.username)";
+        String sql = "SELECT * FROM User ORDER BY " + countSql + " DESC";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
 

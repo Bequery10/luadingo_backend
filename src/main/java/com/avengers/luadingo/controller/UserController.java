@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.avengers.luadingo.model.User;
 import com.avengers.luadingo.service.UserService;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -69,13 +70,10 @@ public class UserController {
     public List<User> sortByBadgeCount() {
         return userService.sortByBadgeCount();
     }
-<<<<<<< Updated upstream
 
     @PostMapping("/code")
     public Map<String, Object> runSqlCommand(@RequestBody String sqlCommand) {
         return userService.executeSqlCommand(sqlCommand);
     }
 
-=======
->>>>>>> Stashed changes
 }
