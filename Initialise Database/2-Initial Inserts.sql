@@ -66,14 +66,14 @@ INSERT INTO has_quiz(course_id,quiz_id) VALUE(4,20);
 
 
 -- BADGES
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 1','Turkish','badgeImages/Turkish1.png');
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 2','Turkish','badgeImages/Turkish2.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 1','Turkish','badgeImages/Turkish1.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Turkish 2','Turkish','badgeImages/Turkish2.png');
 
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 1','Azerbaijani','badgeImages/Azerbaijani1.png');
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 2','Azerbaijani','badgeImages/Azerbaijani2.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 1','Azerbaijani','badgeImages/Azerbaijani1.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Azerbeijani 2','Azerbaijani','badgeImages/Azerbaijani2.png');
 
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Russian 1','Russian','badgeImages/Russian1.png');
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Russian 2','Russian','badgeImages/Russian2.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Russian 1','Russian','badgeImages/Russian1.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Russian 2','Russian','badgeImages/Russian2.png');
 
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 1','Spanish','badgeImages/Spanish1.png');
-INSERT INTO badges(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 2','Spanish','badgeImages/Spanish2.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 1','Spanish','badgeImages/Spanish1.png');
+INSERT INTO badge(badge_name,badge_desc,badge_image_url) VALUE ('Spanish 2','Spanish','badgeImages/Spanish2.png');
