@@ -36,7 +36,7 @@ public class AttemptsRepository {
         int num = jdbcTemplate.update(sql, username, attempt_id, quiz_id);
 
         if (num == 1)
-            return earnBadge(username, quiz_id);
+            return earnBadge(username, quiz_id, attempt_id);
 
         else
             return 0;
@@ -47,23 +47,37 @@ public class AttemptsRepository {
         return jdbcTemplate.update(sql, username, attempt_id, quiz_id);
     }
 
-    public int earnBadge(String username, int quiz_id) {
-        String sql = "SELECT COUNT(*) FROM attempt a join (attempts a JOIN has_quiz q ON a.quiz_id = q.quiz_id WHERE a.username = ? AND a.quiz_id = ?) t on a.attempt_id=t.attempt_id WHERE a.current==5";
-        int count = jdbcTemplate.queryForObject(sql, Integer.class, username, quiz_id);
-        System.out.println("--------------" + count);
+    public int earnBadge(String username, int course_id, int attempt_id) {
+
+        String sql2 = "SELECT attempt_current from attempt where attempt_id = ?";
+        int current = jdbcTemplate.queryForObject(sql2, Integer.class, attempt_id);
+
+        if (current != 5)
+            return 1;
+
+        String sql = "SELECT COUNT(*) " +
+                "FROM (SELECT quiz_id FROM courses JOIN attempts ON courses.quiz_id = attempts.quiz_id WHERE course_id = ?) AS subquery";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, course_id);
         if (count == 2) {
-            String sql1 = "SELECT b.badge_id " + //
-                    "FROM has_course AS hc, badge AS b, course AS c " + //
-                    "WHERE hc.quiz_id = ? AND hc.course_id = c.course_id AND c.language = b.desc;";
-            jdbcTemplate.update(sql1, quiz_id);
+            String sql1 = "INSERT INTO badge (column_name) " +
+                    "SELECT badge_id " +
+                    "FROM badge " +
+                    "JOIN course ON badge.desc = course.language " +
+                    "WHERE course.course_id = ? " +
+                    "LIMIT 1";
+            jdbcTemplate.update(sql1, username, course_id);
             return 2;
         } else if (count == 5) {
-            String sql1 = "SELECT b.badge_id " + //
-                    "FROM has_course AS hc, badge AS b, course AS c " + //
-                    "WHERE hc.quiz_id = ? AND hc.course_id = c.course_id AND c.language = b.desc;";
-            jdbcTemplate.update(sql1, quiz_id);
+            String sql1 = "INSERT INTO badge (column_name) " +
+                    "SELECT badge_id " +
+                    "FROM badge " +
+                    "JOIN course ON badge.desc = course.language " +
+                    "WHERE course.course_id = ? " +
+                    "LIMIT 1,1";
+            jdbcTemplate.update(sql1, username, course_id);
             return 3;
         }
+
         return 1;
     }
 }

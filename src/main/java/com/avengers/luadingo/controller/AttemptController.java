@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import com.avengers.luadingo.model.Attempt;
+import com.avengers.luadingo.model.Has_Quiz;
 import com.avengers.luadingo.service.AttemptService;
 import com.avengers.luadingo.service.AttemptsService;
 
@@ -24,6 +25,7 @@ public class AttemptController {
 
     @PostMapping("/add/{username}/{quiz_id}")
     public int add(@RequestBody Attempt attempt, @PathVariable String username, @PathVariable int quiz_id) {
+
         Attempt attempt1 = attemptService.save(attempt);
         return attemptsService.save(username, attempt1.getAttempt_id(), quiz_id);
 
