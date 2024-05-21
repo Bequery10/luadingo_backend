@@ -54,6 +54,7 @@ public class AttemptsRepository {
 
         if (current != 5)
             return 1;
+
         System.out.println("-----------------------------------------------------0----------------------------");
         String sql = "SELECT COUNT(*) FROM attempts atts JOIN attempt a ON atts.attempt_id = a.attempt_id JOIN has_quiz hq ON atts.quiz_id = hq.quiz_id WHERE atts.username = ? AND hq.course_id = (SELECT course_id FROM has_quiz WHERE quiz_id = ?) AND a.attempt_score = 500;";
         int count = jdbcTemplate.queryForObject(sql, Integer.class, username, quiz_id);

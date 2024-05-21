@@ -158,3 +158,37 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Attempts` (
   )
    ENGINE=InnoDB;
 
+
+-- -----------------------------------------------------
+-- Updates the level of the user when badges earned
+-- -----------------------------------------------------
+
+DELIMITER //
+CREATE TRIGGER update_user_level
+AFTER INSERT ON `Luadingo`.`Has_Badge`
+FOR EACH ROW
+BEGIN
+  DECLARE badge_count INT;
+SELECT COUNT(*) INTO badge_count 
+FROM (
+    SELECT username, COUNT(badge_id) as badge_count
+    FROM `Luadingo`.`Has_Badge`
+    GROUP BY username
+) as subquery
+WHERE username = NEW.username; IF badge_count = 4 THEN
+    UPDATE `Luadingo`.`User` SET level = 'Intermediate' WHERE username = NEW.username;
+  ELSEIF badge_count = 8 THEN
+    UPDATE `Luadingo`.`User` SET level = 'Advanced' WHERE username = NEW.username;
+  END IF;
+END;//
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- VIEW FOR BADGE COUNT
+-- -----------------------------------------------------
+CREATE VIEW `Luadingo`.`UserBadgeCount` AS
+SELECT `username`, COUNT(`badge_id`) AS `badge_count`
+FROM `Luadingo`.`Has_Badge`
+GROUP BY `username`;
+
+
