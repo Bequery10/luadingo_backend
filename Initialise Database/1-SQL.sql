@@ -163,7 +163,6 @@ CREATE TABLE IF NOT EXISTS `Luadingo`.`Attempts` (
 -- Updates the level of the user when badges earned
 -- -----------------------------------------------------
 
-
 DELIMITER //
 CREATE TRIGGER update_user_level
 AFTER INSERT ON `Luadingo`.`Has_Badge`
